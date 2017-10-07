@@ -4,40 +4,33 @@
 
 ### Contents
 
-**1. Introduction**
-1.1 Design Problem Description
-1.2 Design Outline
-1.3 Development Environment
-**2. Design Background**
-2.1 Problem reference from SICP
-**3. Explanation of Technology Used**
-3.1 Amb & Call/cc
-3.2 Streams
-**4. Outline Solution**
-4.1 Description of the used Algorithm
-4.2 Details about the modified use of Algorithm and its result
-**5. Detailed Design**
-5.1 Filling Sudoku Puzzle
-5.2 Swapping Coordinates
-5.3 Calculating Error
-5.4 Solving Sudoku
-**6. Sample output**
-6.1 Solution for an easy 4 x 4 puzzle
-**7. Future Development
-8. References**
+1. Introduction
+    1.1 Design Problem Description
+    1.2 Design Outline
+    1.3 Development Environment
+2. Design Background
+    2.1 Problem reference from SICP
+3. Explanation of Technology Used
+    3.1 Amb & Call/cc
+    3.2 Streams
+4. Outline Solution
+    4.1 Description of the used Algorithm
+    4.2 Details about the modified use of Algorithm and its result
+5. Detailed Design
+    5.1 Filling Sudoku Puzzle
+    5.2 Swapping Coordinates
+    5.3 Calculating Error
+    5.4 Solving Sudoku
+6. Sample output
+    6.1 Solution for an easy 4 x 4 puzzle
+7. Future Development
+8. References
 
 
 ### 1. Introduction
 
-4
-2 1
-1 4
-1
-A 4 X 4 Sudoku problem
-1 3 2 **4**
-4 **2 1** 3
-3 **1 4** 2
-2 4 3 **1**
+<img src="https://github.com/t17711/scheme-non-deterministic-sudoku-solver/raw/master/img/sodoku-1.png">
+
 Solution achieved for the Sudoku
 **1.1 Design Problem Specification**
 Our project was to design a non-deterministic solver for the Sudoku puzzle. Sudoku
@@ -196,33 +189,16 @@ function that accumulates a function in a list. We accumulated a function that
 extracts first n items from each sublist inside the Sudoku to extract sqrt(n) items. It
 is similar to transposing row to columns. Then we have a jumbled list of sqrt (n)
 items which we extract to get something like the following:
-For 4 × 4
-(0, 0)
-(0,1) (0, 2) (0, 3)
-(1, 0) (1,1) (1, 2) (1, 3)
-(2, 0) (2,1) (2, 2) (2, 3)
-(3, 0) (3,1) (3, 2) (3, 3)
-We got the following list:
-(0, 0) (0,1)
-(1, 0) (1,1)
-(2, 0) (2,1)
-(3, 0) (3,1)
-(0, 2) (0, 3)
 
+<img src="https://github.com/t17711/scheme-non-deterministic-sudoku-solver/raw/master/img/sodoku-2.png">
+<img src="https://github.com/t17711/scheme-non-deterministic-sudoku-solver/raw/master/img/sodoku-3.png">
 
-(1, 2) (1, 3)
-( 2, 2) (2, 3)
-(3, 2) (3, 3)
-Then we split the list into n place to get list sorted by sub grid.
-(0, 0) (0,1) (1, 0) (1,1)
-(2, 0) (2,1) (3, 0) (3,1)
-(0, 2) (0, 3) (1, 2) (1, 3)
-(2, 2) (2, 3) (3, 2) (3, 3)
 Using that sort function we fill the Sudoku. First we replace all empty spaces with
 their coordinates. Then we sort all by sub grid. Then we have list of numbers and
 sub grid. If we remove all number we get coordinates of empty cells sorted by
 subgrid.
 
+<img src="https://github.com/t17711/scheme-non-deterministic-sudoku-solver/raw/master/img/sodoku-4.png">
 
 Similarly if we sort unsolved Sudoku without any modification then we get unsolved
 Sudoku sorted by sub grid. Remove all empty spaces from that list and do set
@@ -275,11 +251,14 @@ would definitely give a solution for a sudoku that has a solution.
 We first initialize the sudoku board, with some filled and empty spaces. Little x here
 is acting as a placeholder for empty space.
 
+<img src="https://github.com/t17711/scheme-non-deterministic-sudoku-solver/raw/master/img/sodoku-5.png">
 
 The following is a correct solution to the above defined puzzle. The solver is
 randomly swapping elements within a subgrid until a correct solution is achieved.
 After the first swap, total error amounts to 6. With the following swaps error is
 reduced to 4, then to 2, and lastly to 0.
+
+<img src="https://github.com/t17711/scheme-non-deterministic-sudoku-solver/raw/master/img/sodoku-6.png">
 
 ### 7. Future Development
 
